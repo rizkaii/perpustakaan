@@ -5,16 +5,30 @@
 @section('page-subtitle', 'Kelola koleksi buku perpustakaan')
 
 @section('content')
-<div class="space-y-4">
+<div class="space-y-5">
 
-    {{-- Header --}}
-    <div class="bg-white rounded-xl border border-slate-200 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-            <h2 class="text-base font-semibold text-slate-800">Koleksi Buku</h2>
-            <p class="text-sm text-slate-500 mt-0.5">Total {{ $books->count() }} judul buku tersedia</p>
+    {{-- Header Card --}}
+    <div class="bg-white rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+         style="border:1px solid #eef0f6; box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+        <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                 style="background:rgba(124,58,237,0.1);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color:#7c3aed;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-base font-bold text-slate-800">Koleksi Buku</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Total
+                    <span class="font-semibold" style="color:#7c3aed;">{{ $books->count() }}</span>
+                    judul buku tersedia
+                </p>
+            </div>
         </div>
         <a href="{{ route('books.create') }}"
-           class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors">
+           class="inline-flex items-center gap-2 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all flex-shrink-0"
+           style="background:linear-gradient(135deg,#7c3aed,#4f46e5); box-shadow:0 4px 12px rgba(124,58,237,0.3);"
+           onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
@@ -22,61 +36,65 @@
         </a>
     </div>
 
-    {{-- Table --}}
-    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+    {{-- Table Card --}}
+    <div class="bg-white rounded-2xl overflow-hidden" style="border:1px solid #eef0f6; box-shadow:0 1px 4px rgba(0,0,0,0.04);">
         <div class="p-5 overflow-x-auto">
             <table id="booksTable" class="w-full text-sm">
                 <thead>
-                    <tr class="border-b border-slate-200">
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600 w-12">#</th>
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600 w-16">Cover</th>
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600">Judul / Pengarang</th>
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600">ISBN</th>
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600">Kategori</th>
-                        <th class="text-left pb-3 px-2 font-semibold text-slate-600">Penerbit</th>
-                        <th class="text-center pb-3 px-2 font-semibold text-slate-600">Tahun</th>
-                        <th class="text-center pb-3 px-2 font-semibold text-slate-600">Stok</th>
-                        <th class="text-center pb-3 px-2 font-semibold text-slate-600">Aksi</th>
+                    <tr style="border-bottom:2px solid #f1f3f9;">
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8; width:3rem;">#</th>
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8; width:4rem;">Cover</th>
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Judul / Pengarang</th>
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">ISBN</th>
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Kategori</th>
+                        <th class="text-left pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Penerbit</th>
+                        <th class="text-center pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Tahun</th>
+                        <th class="text-center pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Stok</th>
+                        <th class="text-center pb-3 px-3 font-semibold text-xs uppercase tracking-wider" style="color:#94a3b8;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($books as $book)
-                    <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                        <td class="py-3 px-2 text-slate-400">{{ $loop->iteration }}</td>
-                        <td class="py-3 px-2">
+                    @foreach($books as $book)
+                    <tr class="group transition-colors" style="border-bottom:1px solid #f8f9fc;"
+                        onmouseover="this.style.background='#fafbff'" onmouseout="this.style.background=''">
+                        <td class="py-3.5 px-3 text-xs" style="color:#cbd5e1;">{{ $loop->iteration }}</td>
+                        <td class="py-3.5 px-3">
                             @if($book->cover)
                                 <img src="{{ Storage::url($book->cover) }}" alt="Cover"
-                                     class="w-10 h-14 object-cover rounded-md border border-slate-200">
+                                     class="w-9 h-13 rounded-lg object-cover" style="border:1px solid #eef0f6;">
                             @else
-                                <div class="w-10 h-14 bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <div class="w-9 h-13 rounded-lg flex items-center justify-center" style="background:#f8f9fc; border:1px solid #eef0f6; width:2.25rem; height:3.25rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color:#c4b5fd;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253" />
                                     </svg>
                                 </div>
                             @endif
                         </td>
-                        <td class="py-3 px-2">
-                            <p class="font-medium text-slate-800">{{ $book->judul }}</p>
-                            <p class="text-xs text-slate-400 mt-0.5">{{ $book->pengarang }}</p>
+                        <td class="py-3.5 px-3">
+                            <p class="font-semibold text-slate-800 text-sm">{{ $book->judul }}</p>
+                            <p class="text-xs mt-0.5" style="color:#94a3b8;">{{ $book->pengarang }}</p>
                         </td>
-                        <td class="py-3 px-2 text-slate-600 font-mono text-xs">{{ $book->isbn }}</td>
-                        <td class="py-3 px-2">
-                            <span class="inline-flex items-center bg-violet-50 text-violet-700 text-xs font-medium px-2.5 py-1 rounded-full">
+                        <td class="py-3.5 px-3 font-mono text-xs" style="color:#64748b;">{{ $book->isbn }}</td>
+                        <td class="py-3.5 px-3">
+                            <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full"
+                                  style="background:rgba(124,58,237,0.1); color:#7c3aed;">
                                 {{ $book->category->nama_kategori ?? '-' }}
                             </span>
                         </td>
-                        <td class="py-3 px-2 text-slate-600">{{ $book->penerbit }}</td>
-                        <td class="py-3 px-2 text-center text-slate-600">{{ $book->tahun_terbit }}</td>
-                        <td class="py-3 px-2 text-center">
-                            <span class="inline-flex items-center justify-center min-w-8 px-2 py-1 rounded-full text-xs font-semibold
-                                {{ $book->stok > 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700' }}">
+                        <td class="py-3.5 px-3 text-sm" style="color:#475569;">{{ $book->penerbit }}</td>
+                        <td class="py-3.5 px-3 text-center text-sm" style="color:#475569;">{{ $book->tahun_terbit }}</td>
+                        <td class="py-3.5 px-3 text-center">
+                            <span class="inline-flex items-center justify-center min-w-8 px-2 py-1 rounded-full text-xs font-bold"
+                                  style="{{ $book->stok > 0 ? 'background:#dcfce7;color:#16a34a;' : 'background:#fee2e2;color:#dc2626;' }}">
                                 {{ $book->stok }}
                             </span>
                         </td>
-                        <td class="py-3 px-2">
+                        <td class="py-3.5 px-3">
                             <div class="flex items-center justify-center gap-1.5">
                                 <a href="{{ route('books.edit', $book) }}"
-                                   class="inline-flex items-center gap-1 text-xs font-medium bg-amber-50 text-amber-700 hover:bg-amber-100 px-2.5 py-1.5 rounded-md transition-colors">
+                                   class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors"
+                                   style="background:#fef3c7; color:#d97706;"
+                                   onmouseover="this.style.background='#fde68a'" onmouseout="this.style.background='#fef3c7'">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
@@ -84,7 +102,9 @@
                                 </a>
                                 <button type="button"
                                     onclick="confirmDelete('{{ route('books.destroy', $book) }}', '{{ addslashes($book->judul) }}')"
-                                    class="inline-flex items-center gap-1 text-xs font-medium bg-red-50 text-red-700 hover:bg-red-100 px-2.5 py-1.5 rounded-md transition-colors">
+                                    class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors"
+                                    style="background:#fee2e2; color:#dc2626;"
+                                    onmouseover="this.style.background='#fecaca'" onmouseout="this.style.background='#fee2e2'">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
@@ -93,17 +113,7 @@
                             </div>
                         </td>
                     </tr>
-                    @empty
-                    <tr>
-                        <td colspan="9" class="py-12 text-center text-slate-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mx-auto mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
-                            <p class="font-medium">Belum ada buku</p>
-                            <p class="text-sm mt-1">Mulai tambahkan koleksi buku pertama.</p>
-                        </td>
-                    </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -116,12 +126,17 @@
 <script>
     $('#booksTable').DataTable({
         language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.13.8/i18n/id.json'
+            emptyTable:   "Belum ada data buku",
+            zeroRecords:  "Buku tidak ditemukan",
+            info:         "Menampilkan _START_ - _END_ dari _TOTAL_ buku",
+            infoEmpty:    "Menampilkan 0 buku",
+            infoFiltered: "(difilter dari _MAX_ total)",
+            search:       "Cari:",
+            lengthMenu:   "Tampilkan _MENU_ data",
+            paginate: { first:"Pertama", last:"Terakhir", next:"›", previous:"‹" }
         },
         order: [[2, 'asc']],
-        columnDefs: [
-            { orderable: false, targets: [1, 8] },
-        ],
+        columnDefs: [{ orderable: false, targets: [1, 8] }],
     });
 </script>
 @endpush
